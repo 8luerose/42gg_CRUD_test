@@ -28,16 +28,18 @@ public class BoardController {
     {
         return boardService.getBoards();
     }
-//    @GetMapping("/")
-//    public String list()
-//    {
-//        return "board/";
-//    }
-//    @GetMapping("/post")
-//    public String write()
-//    {
-//        return "board/";
-//    }
+
+    @PutMapping ("/{id}")
+    public BoardDto updateBoard(@PathVariable Long id, @RequestBody BoardDto boardDto)
+    {
+        return boardService.updateBoard(id, boardDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBoard(@PathVariable Long id)
+    {
+        boardService.deleteBoard(id);
+    }
 }
 
 

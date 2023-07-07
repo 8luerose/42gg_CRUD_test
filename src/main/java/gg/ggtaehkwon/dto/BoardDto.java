@@ -3,7 +3,6 @@ package gg.ggtaehkwon.dto;
 import gg.ggtaehkwon.domain.entity.Board;
 import lombok.*;
 
-import java.sql.Struct;
 import java.time.LocalDateTime;
 
 @Getter

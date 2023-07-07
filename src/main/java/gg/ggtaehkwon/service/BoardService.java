@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.Optional;
 
 
 @Service
@@ -41,4 +41,30 @@ public class BoardService {
         }
         return boardDtoList;
     }
+
+    public BoardDto updateBoard(Long id, BoardDto boardDto)
+    {
+        Optional<Board> optionalBoard = boardRepository.findById(id);
+
+        if (optionalBoard.isPresent())
+        {
+            Board board = optionalBoard.get();
+            board.setTitle(boardDto.getTitle());
+            board.setContent(boardDto.getContent());
+            Board updatedBoard = boardRepository.save(board);
+
+            BoardDto returnBoardDto = new BoardDto();
+            returnBoardDto.setId(updatedBoard.getId());
+            returnBoardDto.setTitle(updatedBoard.getTitle());
+            returnBoardDto.setContent(updatedBoard.getContent());
+            return returnBoardDto;
+        }
+        return null;
+    }
+
+    public void deleteBoard(Long id)
+    {
+        boardRepository.deleteById(id);
+    }
+
 }
