@@ -3,8 +3,9 @@ package gg.ggtaehkwon.controller;
 
 import gg.ggtaehkwon.dto.BoardDto;
 import gg.ggtaehkwon.service.BoardService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BoardController {
@@ -20,6 +21,12 @@ public class BoardController {
     public Long savePost(@RequestBody BoardDto boardDto)
     {
         return boardService.savePost(boardDto);
+    }
+
+    @GetMapping("/")
+    public List<BoardDto> getAllBoards()
+    {
+        return boardService.getBoards();
     }
 //    @GetMapping("/")
 //    public String list()
