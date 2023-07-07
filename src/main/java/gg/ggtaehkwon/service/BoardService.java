@@ -1,11 +1,25 @@
 package gg.ggtaehkwon.service;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import gg.ggtaehkwon.domain.repository.BoardRepository;
+import gg.ggtaehkwon.dto.BoardDto;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.stream.Collector;
 
 
-@RestController
-@RequestMapping("/ap/boardsi")
+@Service
 public class BoardService {
-    private final BoardService boardService;
+    private final BoardRepository boardRepository;
+
+    public BoardService(BoardRepository boardRepository)
+    {
+        this.boardRepository = boardRepository;
+    }
+
+    @Transactional
+    public Long savePost(BoardDto boardDto)
+    {
+        return boardRepository.save(boardDto.toEntity()).getId();
+    }
 }
